@@ -1,0 +1,73 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "plugins": [
+    "html"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@angular-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:import/recommended"
+      ],
+      "rules": {
+        "no-empty-function": "off",
+        "@angular-eslint/no-empty-lifecycle-method": "off",
+        "no-var": "error",
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "warn",
+              "error"
+            ]
+          }
+        ],
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off",
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              "builtin",
+              "external",
+              "internal",
+              [
+                "index",
+                "sibling",
+                "parent"
+              ],
+              [
+                "object"
+              ]
+            ],
+            "newlines-between": "always-and-inside-groups",
+            "pathGroupsExcludedImportTypes": [
+              "builtin"
+            ],
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "rules": {
+        "@angular-eslint/template/no-call-expression": "warn"
+      }
+    }
+  ]
+}
