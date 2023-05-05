@@ -1,0 +1,49 @@
+<div class="expansion">
+  <shared-expansion-panel
+    panelDescription="Enter the device name or something else.."
+    panelTitle="Table filtering"
+  >
+    <devices-filter (filterDataEvent)="filterData($event)"></devices-filter>
+  </shared-expansion-panel>
+</div>
+<div class="devices-table">
+  <table [dataSource]="tableSource" class="mat-elevation-z5" mat-table>
+    <ng-container matColumnDef="id">
+      <th *matHeaderCellDef mat-header-cell>Device ID</th>
+      <td *matCellDef="let element" mat-cell>{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th *matHeaderCellDef mat-header-cell>Device Title</th>
+      <td *matCellDef="let element" mat-cell>{{ element.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="deviceType">
+      <th *matHeaderCellDef mat-header-cell>Device Type</th>
+      <td *matCellDef="let element" mat-cell>{{ element.deviceType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="enabled">
+      <th *matHeaderCellDef mat-header-cell>Device enabled</th>
+      <td *matCellDef="let element" mat-cell>{{ element.enabled }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="houseId">
+      <th *matHeaderCellDef mat-header-cell>Device House Id</th>
+      <td *matCellDef="let element" mat-cell>{{ element.houseId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastActivity">
+      <th *matHeaderCellDef mat-header-cell>Device last activity</th>
+      <td *matCellDef="let element" mat-cell>{{ element.lastActivity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th *matHeaderCellDef mat-header-cell>Device status</th>
+      <td *matCellDef="let element" mat-cell>{{ element.status }}</td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+  </table>
+</div>

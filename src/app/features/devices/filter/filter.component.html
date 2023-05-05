@@ -1,0 +1,15 @@
+<div class="devices-filter">
+  <form class="flex flex-ac gap20">
+    <mat-form-field [ngStyle]="{ marginBottom: '-1.25em' }">
+      <input #nameInput matInput placeholder="Device name" type="text"/>
+    </mat-form-field>
+    <button
+      (click)="filterData(nameInput.value)"
+      color="primary"
+      mat-raised-button
+      type="button"
+    >
+      Submit filter
+    </button>
+  </form>
+</div>
