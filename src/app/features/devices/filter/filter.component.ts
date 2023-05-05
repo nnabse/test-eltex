@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'devices-filter',
@@ -6,4 +11,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FilterComponent {}
+export class FilterComponent {
+  @Output() protected filterDataEvent = new EventEmitter<string>();
+
+  protected filterData(value: string): void {
+    this.filterDataEvent.emit(value);
+  }
+}

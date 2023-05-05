@@ -1,0 +1,14 @@
+<div class="expansion">
+  <shared-expansion-panel
+    panelDescription="Enter the device name or something else.."
+    panelTitle="Table filtering"
+  >
+    <devices-filter (filterDataEvent)="filterData($event)"></devices-filter>
+  </shared-expansion-panel>
+</div>
+<div class="devices-table">
+  <table [dataSource]="tableSource" class="mat-elevation-z5" mat-table>
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+  </table>
+</div>
