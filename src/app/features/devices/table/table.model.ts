@@ -6,4 +6,5 @@ export enum TableDisplayedColumns {
   HOUSE_ID = 'houseId',
   LAST_ACTIVITY = 'lastActivity',
   STATUS = 'status',
+  LOCATIONS = 'locations',
 }

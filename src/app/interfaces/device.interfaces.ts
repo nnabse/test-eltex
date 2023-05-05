@@ -9,7 +9,7 @@ export interface Device {
     | 'ELTEX_DIMMER';
   enabled: boolean;
   houseId: string;
-  lastActivity: number;
+  lastActivity: Date;
   status: 'ONLINE' | 'OFFLINE' | 'UNAVAILABLE' | 'INITIALIZING' | 'UNKNOWN';
   locations: string[];
   settings: DeviceSettings;

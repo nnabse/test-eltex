@@ -6,44 +6,56 @@
     <devices-filter (filterDataEvent)="filterData($event)"></devices-filter>
   </shared-expansion-panel>
 </div>
-<div class="devices-table">
-  <table [dataSource]="tableSource" class="mat-elevation-z5" mat-table>
+<div class="devices-table mat-elevation-z5">
+  <table [dataSource]="tableSource" mat-table matSort>
     <ng-container matColumnDef="id">
-      <th *matHeaderCellDef mat-header-cell>Device ID</th>
-      <td *matCellDef="let element" mat-cell>{{ element.id }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Device ID</th>
+      <td *matCellDef="let device" mat-cell>{{ device.id }}</td>
     </ng-container>
 
     <ng-container matColumnDef="title">
-      <th *matHeaderCellDef mat-header-cell>Device Title</th>
-      <td *matCellDef="let element" mat-cell>{{ element.title }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Device Title</th>
+      <td *matCellDef="let device" mat-cell>{{ device.title }}</td>
     </ng-container>
 
     <ng-container matColumnDef="deviceType">
-      <th *matHeaderCellDef mat-header-cell>Device Type</th>
-      <td *matCellDef="let element" mat-cell>{{ element.deviceType }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Device Type</th>
+      <td *matCellDef="let device" mat-cell>{{ device.deviceType }}</td>
     </ng-container>
 
     <ng-container matColumnDef="enabled">
-      <th *matHeaderCellDef mat-header-cell>Device enabled</th>
-      <td *matCellDef="let element" mat-cell>{{ element.enabled }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Device Enabled</th>
+      <td *matCellDef="let device" mat-cell>{{ device.enabled }}</td>
     </ng-container>
 
     <ng-container matColumnDef="houseId">
-      <th *matHeaderCellDef mat-header-cell>Device House Id</th>
-      <td *matCellDef="let element" mat-cell>{{ element.houseId }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Device House Id</th>
+      <td *matCellDef="let device" mat-cell>{{ device.houseId }}</td>
     </ng-container>
 
     <ng-container matColumnDef="lastActivity">
-      <th *matHeaderCellDef mat-header-cell>Device last activity</th>
-      <td *matCellDef="let element" mat-cell>{{ element.lastActivity }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        Device Last Activity
+      </th>
+      <td *matCellDef="let device" mat-cell>
+        {{ device.lastActivity | date }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th *matHeaderCellDef mat-header-cell>Device status</th>
-      <td *matCellDef="let element" mat-cell>{{ element.status }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Device Status</th>
+      <td *matCellDef="let device" mat-cell>{{ device.status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="locations">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        Device Locations
+      </th>
+      <td *matCellDef="let device" mat-cell>{{ device.locations }}</td>
     </ng-container>
 
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
     <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
 </div>
