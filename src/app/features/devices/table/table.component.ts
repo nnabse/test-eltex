@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,7 +17,7 @@ import { Device } from '@interfaces/device.interfaces';
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   protected tableSource = new MatTableDataSource<Device>([]);
@@ -34,10 +35,46 @@ export class TableComponent implements AfterViewInit {
     TableDisplayedColumns.PASSWORD,
   ];
 
-  ngAfterViewInit() {
-    if (this.sort) this.tableSource.sort = this.sort;
-    if (this.paginator) this.tableSource.paginator = this.paginator;
+  ngOnInit(): void {
+    const materialTableFilter = this.tableSource.filterPredicate;
+    this.tableSource.filterPredicate = (
+      list: Device,
+      filter: string
+    ): boolean =>
+      this.isTableSourceIncludesData(list, filter) ||
+      materialTableFilter(list, filter);
   }
 
-  protected filterData(value: string): void {}
+  ngAfterViewInit(): void {
+    if (this.paginator) this.tableSource.paginator = this.paginator;
+    if (!this.sort) return;
+    this.tableSource.sortingDataAccessor = (item: Device, property) => {
+      switch (property) {
+        case TableDisplayedColumns.PORT:
+          return item.settings.port;
+        case TableDisplayedColumns.NAME:
+          return item.settings.name;
+        case TableDisplayedColumns.PASSWORD:
+          return item.settings.password;
+        default:
+          return item.id;
+      }
+    };
+    this.tableSource.sort = this.sort;
+  }
+
+  protected filterData(value: string): void {
+    this.tableSource.filter = value.trim().toLowerCase();
+    if (this.tableSource.paginator) this.tableSource.paginator.firstPage();
+  }
+
+  private isTableSourceIncludesData(list: Device, filter: string): boolean {
+    const name =
+      !filter || list.settings.name.trim().toLowerCase().includes(filter);
+    const port =
+      !filter || list.settings.port.trim().toLowerCase().includes(filter);
+    const password =
+      !filter || list.settings.password.trim().toLowerCase().includes(filter);
+    return name || port || password;
+  }
 }
