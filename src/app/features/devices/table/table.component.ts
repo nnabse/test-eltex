@@ -28,6 +28,9 @@ export class TableComponent implements AfterViewInit {
     TableDisplayedColumns.LAST_ACTIVITY,
     TableDisplayedColumns.STATUS,
     TableDisplayedColumns.LOCATIONS,
+    TableDisplayedColumns.PORT,
+    TableDisplayedColumns.NAME,
+    TableDisplayedColumns.PASSWORD,
   ];
 
   ngAfterViewInit() {

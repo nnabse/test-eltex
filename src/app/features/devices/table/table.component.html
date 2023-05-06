@@ -54,6 +54,27 @@
       <td *matCellDef="let device" mat-cell>{{ device.locations }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="port">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        Settings Port
+      </th>
+      <td *matCellDef="let device" mat-cell>{{ device.settings.port }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        Settings Name
+      </th>
+      <td *matCellDef="let device" mat-cell>{{ device.settings.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="password">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>
+        Settings Password
+      </th>
+      <td *matCellDef="let device" mat-cell>{{ device.settings.password }}</td>
+    </ng-container>
+
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
     <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   </table>

@@ -7,4 +7,7 @@ export enum TableDisplayedColumns {
   LAST_ACTIVITY = 'lastActivity',
   STATUS = 'status',
   LOCATIONS = 'locations',
+  PORT = 'port',
+  NAME = 'name',
+  PASSWORD = 'password',
 }
