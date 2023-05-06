@@ -13,6 +13,7 @@ import { Device } from '@interfaces/device.interfaces';
 @Component({
   selector: 'devices-table',
   templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements AfterViewInit {

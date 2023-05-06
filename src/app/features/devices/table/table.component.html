@@ -6,6 +6,17 @@
     <devices-filter (filterDataEvent)="filterData($event)"></devices-filter>
   </shared-expansion-panel>
 </div>
+<div class="device-table-buttons flex gap20 m020">
+  <div class="add-custom-device-button">
+    <device-add-custom></device-add-custom>
+  </div>
+  <div class="add-random-device-button">
+    <device-add-random></device-add-random>
+  </div>
+  <div class="remove-device-button ml-a">
+    <device-remove-button></device-remove-button>
+  </div>
+</div>
 <div class="devices-table mat-elevation-z5">
   <table [dataSource]="tableSource" mat-table matSort>
     <ng-container matColumnDef="id">
@@ -55,16 +66,12 @@
     </ng-container>
 
     <ng-container matColumnDef="port">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>
-        Settings Port
-      </th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Settings Port</th>
       <td *matCellDef="let device" mat-cell>{{ device.settings.port }}</td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>
-        Settings Name
-      </th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Settings Name</th>
       <td *matCellDef="let device" mat-cell>{{ device.settings.name }}</td>
     </ng-container>
 
@@ -78,5 +85,8 @@
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
     <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

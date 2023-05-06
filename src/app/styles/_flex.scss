@@ -17,6 +17,11 @@
   -webkit-align-items: center;
 }
 
+.flex-nowrap {
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+}
+
 .gap20 {
   gap: 20px;
 }

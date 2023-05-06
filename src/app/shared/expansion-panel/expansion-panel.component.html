@@ -5,6 +5,7 @@
       {{ panelDescription }}
     </mat-panel-description>
   </mat-expansion-panel-header>
-
-  <ng-content></ng-content>
+  <div [ngStyle]="{ padding: '10px 0' }" class="content">
+    <ng-content></ng-content>
+  </div>
 </mat-expansion-panel>

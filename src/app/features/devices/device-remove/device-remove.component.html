@@ -1,0 +1,4 @@
+<button (click)="removeSelectedDevices()" color="warn" mat-raised-button>
+  Delete Device<span *ngIf="selectedDevicesNumber">s</span>
+  ({{ selectedDevicesNumber }})
+</button>

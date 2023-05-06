@@ -25,9 +25,9 @@ export function generateDevice(): Device {
     ]),
     locations: [faker.address.cityName()],
     settings: {
-      port: faker.datatype.string(),
-      name: faker.lorem.words(3),
-      password: faker.datatype.string(),
+      port: String(faker.datatype.number(65535)),
+      name: faker.lorem.word({ length: { min: 5, max: 15 } }),
+      password: faker.internet.password(),
     },
   };
 }
