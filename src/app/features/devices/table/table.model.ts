@@ -1,4 +1,5 @@
 export enum TableDisplayedColumns {
+  SELECT = 'select',
   ID = 'id',
   TITLE = 'title',
   DEVICE_TYPE = 'deviceType',

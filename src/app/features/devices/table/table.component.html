@@ -14,11 +14,35 @@
     <device-add-random></device-add-random>
   </div>
   <div class="remove-device-button ml-a">
-    <device-remove-button></device-remove-button>
+    <device-remove-button
+      [selectedDevicesNumber]="checkedDevicesNumber"
+      [selectedDevices]="checkedDevices"
+    >
+    </device-remove-button>
   </div>
 </div>
 <div class="devices-table mat-elevation-z5">
   <table [dataSource]="tableSource" mat-table matSort>
+    <ng-container matColumnDef="select">
+      <th *matHeaderCellDef mat-header-cell>
+        <mat-checkbox
+          (change)="$event ? toggleAllRows() : null"
+          [aria-label]="checkboxLabel()"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+        >
+        </mat-checkbox>
+      </th>
+      <td *matCellDef="let row" mat-cell>
+        <mat-checkbox
+          (change)="$event ? selection.toggle(row) : null"
+          (click)="$event.stopPropagation()"
+          [aria-label]="checkboxLabel(row)"
+          [checked]="selection.isSelected(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
     <ng-container matColumnDef="id">
       <th *matHeaderCellDef mat-header-cell mat-sort-header>Device ID</th>
       <td *matCellDef="let device" mat-cell>{{ device.id }}</td>
@@ -83,7 +107,11 @@
     </ng-container>
 
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+    <tr
+      (click)="selection.toggle(row)"
+      *matRowDef="let row; columns: displayedColumns"
+      mat-row
+    ></tr>
   </table>
   <mat-paginator
     [pageSizeOptions]="[5, 10, 25, 50]"

@@ -7,6 +7,7 @@ import { DeviceAddCustomComponent } from '@features/devices/device-add-custom/de
 import { DeviceAddRandomComponent } from '@features/devices/device-add-random/device-add-random.component';
 import { DeviceCreateDialogComponent } from '@features/devices/device-create-dialog/device-create-dialog.component';
 import { DeviceRemoveComponent } from '@features/devices/device-remove/device-remove.component';
+import { DeviceRemoveDialogComponent } from '@features/devices/device-remove-dialog/device-remove-dialog.component';
 import { DevicesRoutingModule } from '@features/devices/devices-routing.module';
 import { DevicesComponent } from '@features/devices/devices.component';
 import { FilterComponent } from '@features/devices/filter/filter.component';
@@ -22,6 +23,7 @@ import { SharedModule } from '@shared/shared.module';
     DeviceCreateDialogComponent,
     DeviceAddCustomComponent,
     DeviceAddRandomComponent,
+    DeviceRemoveDialogComponent,
   ],
   imports: [
     CommonModule,

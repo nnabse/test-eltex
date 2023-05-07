@@ -1,4 +1,9 @@
-<button (click)="removeSelectedDevices()" color="warn" mat-raised-button>
-  Delete Device<span *ngIf="selectedDevicesNumber">s</span>
+<button
+  (click)="openRemoveDevicesDialog()"
+  [disabled]="!selectedDevicesNumber"
+  color="warn"
+  mat-raised-button
+>
+  Delete Device<span *ngIf="selectedDevicesNumber > 1">s</span>
   ({{ selectedDevicesNumber }})
 </button>

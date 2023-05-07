@@ -1,7 +1,9 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -10,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableDisplayedColumns } from '@features/devices/table/table.model';
 import { Device } from '@interfaces/device.interfaces';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'devices-table',
@@ -17,11 +20,13 @@ import { Device } from '@interfaces/device.interfaces';
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  protected tableSource = new MatTableDataSource<Device>([]);
+  protected readonly tableSource = new MatTableDataSource<Device>([]);
+  protected readonly selection = new SelectionModel<Device>(true, []);
   protected readonly displayedColumns: TableDisplayedColumns[] = [
+    TableDisplayedColumns.SELECT,
     TableDisplayedColumns.ID,
     TableDisplayedColumns.TITLE,
     TableDisplayedColumns.DEVICE_TYPE,
@@ -34,6 +39,9 @@ export class TableComponent implements OnInit, AfterViewInit {
     TableDisplayedColumns.NAME,
     TableDisplayedColumns.PASSWORD,
   ];
+  protected checkedDevicesNumber = 0;
+  protected checkedDevices: Device[] = [];
+  private checkboxSubscription = Subscription.EMPTY;
 
   ngOnInit(): void {
     const materialTableFilter = this.tableSource.filterPredicate;
@@ -43,6 +51,11 @@ export class TableComponent implements OnInit, AfterViewInit {
     ): boolean =>
       this.isTableSourceIncludesData(list, filter) ||
       materialTableFilter(list, filter);
+
+    this.checkboxSubscription = this.selection.changed.subscribe((change) => {
+      this.checkedDevices = change.source.selected;
+      this.checkedDevicesNumber = this.checkedDevices.length;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -61,6 +74,33 @@ export class TableComponent implements OnInit, AfterViewInit {
       }
     };
     this.tableSource.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    this.checkboxSubscription.unsubscribe();
+  }
+
+  protected isAllSelected(): boolean {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.tableSource.data.length;
+    return numSelected === numRows;
+  }
+
+  protected toggleAllRows(): void {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.tableSource.data);
+  }
+
+  protected checkboxLabel(row?: Device): string {
+    if (!row) return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row${
+      row.id + 1
+    }`;
   }
 
   protected filterData(value: string): void {
