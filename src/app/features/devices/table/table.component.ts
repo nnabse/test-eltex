@@ -24,7 +24,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   protected readonly tableSource = new MatTableDataSource<Device>([]);
-  protected readonly selection = new SelectionModel<Device>(true, []);
+  protected selection = new SelectionModel<Device>(true, []);
   protected readonly displayedColumns: TableDisplayedColumns[] = [
     TableDisplayedColumns.SELECT,
     TableDisplayedColumns.ID,
@@ -52,10 +52,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isTableSourceIncludesData(list, filter) ||
       materialTableFilter(list, filter);
 
-    this.checkboxSubscription = this.selection.changed.subscribe((change) => {
-      this.checkedDevices = change.source.selected;
-      this.checkedDevicesNumber = this.checkedDevices.length;
-    });
+    this.checkboxSubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -70,7 +67,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         case TableDisplayedColumns.PASSWORD:
           return item.settings.password;
         default:
-          return item.id;
+          return String(item[property as keyof Device]);
       }
     };
     this.tableSource.sort = this.sort;
@@ -106,6 +103,13 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   protected filterData(value: string): void {
     this.tableSource.filter = value.trim().toLowerCase();
     if (this.tableSource.paginator) this.tableSource.paginator.firstPage();
+  }
+
+  private checkboxSubscribe(): void {
+    this.checkboxSubscription = this.selection.changed.subscribe((change) => {
+      this.checkedDevices = change.source.selected;
+      this.checkedDevicesNumber = this.checkedDevices.length;
+    });
   }
 
   private isTableSourceIncludesData(list: Device, filter: string): boolean {
