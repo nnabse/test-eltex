@@ -41,6 +41,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
   protected checkedDevicesNumber = 0;
   protected checkedDevices: Device[] = [];
+  protected filterValue = '';
   private checkboxSubscription = Subscription.EMPTY;
 
   ngOnInit(): void {
@@ -101,7 +102,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   protected filterData(value: string): void {
-    this.tableSource.filter = value.trim().toLowerCase();
+    this.filterValue = value.trim().toLowerCase();
+    this.tableSource.filter = this.filterValue;
     if (this.tableSource.paginator) this.tableSource.paginator.firstPage();
   }
 

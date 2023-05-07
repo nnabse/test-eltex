@@ -112,6 +112,15 @@
       *matRowDef="let row; columns: displayedColumns"
       mat-row
     ></tr>
+
+    <tr *matNoDataRow class="mat-row">
+      <td class="mat-cell" colspan="4">
+        No data in the table
+        <span *ngIf="filterValue && tableSource.data.length">
+          matching the filter "{{ filterValue }}"
+        </span>
+      </td>
+    </tr>
   </table>
   <mat-paginator
     [pageSizeOptions]="[5, 10, 25, 50]"
