@@ -25,4 +25,27 @@ export class DeviceCreateDialogComponent {
     name: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
   });
+
+  protected createNewDevice(): void {
+    const device = this.newDeviceForm.value;
+    device.settings = {};
+    const deviceKeys = Object.keys(device || []);
+
+    for (let i = 0; i <= deviceKeys.length - 1; i++) {
+      switch (deviceKeys[i]) {
+        case 'port':
+          device.settings.port = device.port;
+          delete device.port;
+          break;
+        case 'name':
+          device.settings.name = device.name;
+          delete device.name;
+          break;
+        case 'password':
+          device.settings.password = device.password;
+          delete device.password;
+          break;
+      }
+    }
+  }
 }
