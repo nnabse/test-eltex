@@ -24,7 +24,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   protected readonly tableSource = new MatTableDataSource<Device>([]);
-  protected selection = new SelectionModel<Device>(true, []);
+  protected selection?: SelectionModel<Device>;
   protected readonly displayedColumns: TableDisplayedColumns[] = [
     TableDisplayedColumns.SELECT,
     TableDisplayedColumns.ID,
@@ -79,24 +79,24 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   protected isAllSelected(): boolean {
-    const numSelected = this.selection.selected.length;
+    const numSelected = this.selection?.selected.length;
     const numRows = this.tableSource.data.length;
     return numSelected === numRows;
   }
 
   protected toggleAllRows(): void {
     if (this.isAllSelected()) {
-      this.selection.clear();
+      this.selection?.clear();
       return;
     }
 
-    this.selection.select(...this.tableSource.data);
+    this.selection?.select(...this.tableSource.data);
   }
 
   protected checkboxLabel(row?: Device): string {
     if (!row) return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
 
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row${
+    return `${this.selection?.isSelected(row) ? 'deselect' : 'select'} row${
       row.id + 1
     }`;
   }
@@ -107,7 +107,14 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.tableSource.paginator) this.tableSource.paginator.firstPage();
   }
 
+  private clearSelectionValues(): void {
+    this.selection = new SelectionModel<Device>(true, []);
+    this.checkedDevicesNumber = 0;
+    this.checkedDevices = [];
+  }
+
   private checkboxSubscribe(): void {
+    if (!this.selection) return;
     this.checkboxSubscription = this.selection.changed.subscribe((change) => {
       this.checkedDevices = change.source.selected;
       this.checkedDevicesNumber = this.checkedDevices.length;
