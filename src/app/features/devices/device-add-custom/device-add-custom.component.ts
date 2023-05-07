@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DeviceCreateDialogComponent } from '@features/devices/device-create-dialog/device-create-dialog.component';
+import { DeviceAddDialogComponent } from '@features/devices/device-add-dialog/device-add-dialog.component';
 
 @Component({
   selector: 'device-add-custom',
@@ -11,7 +11,7 @@ export class DeviceAddCustomComponent {
   constructor(protected readonly dialog: MatDialog) {}
 
   protected openDialog(): void {
-    this.dialog.open(DeviceCreateDialogComponent, {
+    this.dialog.open(DeviceAddDialogComponent, {
       width: '50%',
     });
   }

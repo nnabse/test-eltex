@@ -3,12 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DeviceStatus, DeviceType } from '@features/devices/devices.model';
 
 @Component({
-  selector: 'device-create-dialog',
-  templateUrl: './device-create-dialog.component.html',
-  styleUrls: ['./device-create-dialog.component.scss'],
+  selector: 'device-add-dialog',
+  templateUrl: './device-add-dialog.component.html',
+  styleUrls: ['./device-add-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeviceCreateDialogComponent {
+export class DeviceAddDialogComponent {
   protected readonly maxDate = new Date();
   protected readonly deviceType = DeviceType;
   protected readonly deviceStatus = DeviceStatus;
