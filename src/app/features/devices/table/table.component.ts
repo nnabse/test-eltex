@@ -118,7 +118,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     const name =
       !filter || list.settings.name.trim().toLowerCase().includes(filter);
     const port =
-      !filter || list.settings.port.trim().toLowerCase().includes(filter);
+      !filter ||
+      String(list.settings.port).trim().toLowerCase().includes(filter);
     const password =
       !filter || list.settings.password.trim().toLowerCase().includes(filter);
     return name || port || password;

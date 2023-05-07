@@ -52,6 +52,7 @@
       <mat-label>Device Last Activity</mat-label>
       <input
         [matDatepicker]="datepicker"
+        [max]="maxDate"
         formControlName="lastActivity"
         matInput
       />
@@ -93,10 +94,11 @@
 
     <mat-form-field>
       <input
+        [max]="65535"
         formControlName="port"
         matInput
         placeholder="Settings Port"
-        type="text"
+        type="number"
       />
     </mat-form-field>
 

@@ -9,6 +9,7 @@ import { DeviceStatus, DeviceType } from '@features/devices/devices.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeviceCreateDialogComponent {
+  protected readonly maxDate = new Date();
   protected readonly deviceType = DeviceType;
   protected readonly deviceStatus = DeviceStatus;
   protected readonly newDeviceForm: FormGroup = new FormGroup({
@@ -24,6 +25,4 @@ export class DeviceCreateDialogComponent {
     name: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
   });
-
-  protected createNewDevice(): void {}
 }
