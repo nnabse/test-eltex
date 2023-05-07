@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DeviceService } from '@features/devices/services/device.service';
 
 @Component({
   selector: 'device-add-random',
@@ -6,5 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeviceAddRandomComponent {
-  protected createRandomDevice(): void {}
+  constructor(private readonly deviceService: DeviceService) {}
+
+  protected createRandomDevice(): void {
+    this.deviceService.addDevice();
+  }
 }
