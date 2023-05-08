@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DeviceStatus, DeviceType } from '@features/devices/devices.model';
+import { DevicesService } from '@features/devices/state/devices.service';
 
 @Component({
   selector: 'device-add-dialog',
@@ -26,6 +27,8 @@ export class DeviceAddDialogComponent {
     password: new FormControl(null, Validators.required),
   });
 
+  constructor(private readonly devicesService: DevicesService) {}
+
   protected createNewDevice(): void {
     const device = this.newDeviceForm.value;
     device.settings = {};
@@ -47,5 +50,7 @@ export class DeviceAddDialogComponent {
           break;
       }
     }
+
+    this.devicesService.addCustomDevice(device);
   }
 }
