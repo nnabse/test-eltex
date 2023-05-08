@@ -10,6 +10,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DevicesService } from '@features/devices/state/devices.service';
 import { TableDisplayedColumns } from '@features/devices/table/table.model';
 import { Device } from '@interfaces/device.interfaces';
 import { Subscription } from 'rxjs';
@@ -23,6 +24,7 @@ import { Subscription } from 'rxjs';
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
+  protected readonly deviceList$ = this.devicesService.getDeviceList();
   protected readonly tableSource = new MatTableDataSource<Device>([]);
   protected selection?: SelectionModel<Device>;
   protected readonly displayedColumns: TableDisplayedColumns[] = [
@@ -42,7 +44,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   protected checkedDevicesNumber = 0;
   protected checkedDevices: Device[] = [];
   protected filterValue = '';
+  private deviceListSubscription = Subscription.EMPTY;
   private checkboxSubscription = Subscription.EMPTY;
+
+  constructor(private devicesService: DevicesService) {}
 
   ngOnInit(): void {
     const materialTableFilter = this.tableSource.filterPredicate;
@@ -53,7 +58,14 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isTableSourceIncludesData(list, filter) ||
       materialTableFilter(list, filter);
 
-    this.checkboxSubscribe();
+    this.devicesService.isInitialized();
+
+    this.deviceListSubscription = this.deviceList$.subscribe((list) => {
+      this.tableSource.data = list;
+
+      this.clearSelectionValues();
+      this.checkboxSubscribe();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -75,6 +87,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.deviceListSubscription.unsubscribe();
     this.checkboxSubscription.unsubscribe();
   }
 

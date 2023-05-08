@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModules } from '@app/material/material.module';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { DeviceAddCustomComponent } from '@features/devices/device-add-custom/device-add-custom.component';
 import { DeviceAddDialogComponent } from '@features/devices/device-add-dialog/device-add-dialog.component';
 import { DeviceAddRandomComponent } from '@features/devices/device-add-random/device-add-random.component';
@@ -32,6 +33,7 @@ import { SharedModule } from '@shared/shared.module';
     MaterialModules,
     SharedModule,
     ReactiveFormsModule,
+    AkitaNgRouterStoreModule,
   ],
 })
 export class DevicesModule {}
