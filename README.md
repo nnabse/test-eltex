@@ -1,27 +1,54 @@
-# TestEltex
+## A test task for Eltex company
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
+The application is an Angular 15 SPA application
+with the Devices page, which contains
+the following functions:
 
-## Development server
+- A table that displays a list of devices (random or pre-entered data), has sorting, filtering and pagination.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+  ![Table sorting](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjBlMWY3MDE4ZDBhNzAwZTI3MGJkM2RlM2NlODQ4ZWU3ODQyMGQ0MSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/6o0hK7EsJA4mYHlWzz/giphy.gif)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- The "Add custom device" button, which opens a modal window with a form for entering data about the device.
 
-## Build
+  ![Create custom device](https://media.giphy.com/media/oRnk8Tz8HQnW8Y0ueq/giphy.gif)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+- The "Add random device" button, which creates a device with randomly generated data.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  ![Create random device](https://media.giphy.com/media/0ExZkLD5zANOJDHTTq/giphy.gif)
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- The "Delete device(s)" button, which is available only if at least one device is selected in the table.
+  ![Remove selected devices](https://media.giphy.com/media/xLqb4FM2lWQCnlxsMK/giphy.gif)
 
-## Further help
+## To start the application, do the following:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Clone repository:
+  ```
+  git clone git@github.com:nnabse/test-eltex.git
+  ```
+- Install dependencies (npm):
+
+  ```
+  npm install
+  ```
+- Install dependencies (yarn):
+  ```
+  yarn
+  ```
+- Run application (npm)
+  ```
+  npm run start
+  ```
+- Run application (yarn)
+  ```
+  yarn run start
+  ```
+
+The application should run on http://localhost:4200, please make sure that port **4200 is NOT** busy.
+
+The repository has branches **main** and **feat/subjects**.
+
+The **feat/subjects** branch has the same functionality as the **main** branch,
+but runs on RxJS BehaviorSubjects.
