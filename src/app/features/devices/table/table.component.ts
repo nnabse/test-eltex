@@ -74,7 +74,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.tableSource.sortingDataAccessor = (item: Device, property) => {
       switch (property) {
         case TableDisplayedColumns.PORT:
-          return item.settings.port;
+          return Number(item.settings.port);
         case TableDisplayedColumns.NAME:
           return item.settings.name;
         case TableDisplayedColumns.PASSWORD:
