@@ -20,6 +20,7 @@ the following functions:
 
 
 - The "Delete device(s)" button, which is available only if at least one device is selected in the table.
+
   ![Remove selected devices](https://media.giphy.com/media/xLqb4FM2lWQCnlxsMK/giphy.gif)
 
 ## To start the application, do the following:
